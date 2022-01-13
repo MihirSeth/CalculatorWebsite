@@ -1,0 +1,123 @@
+body{
+    background-color: #e63946;
+    font-family: 'Roboto','sans-serif';
+}
+ h1{
+    text-align: center;
+    color: white;
+    font-size: 60px;
+ }
+
+ p{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    padding-top: 4%;
+    padding-right: 2%;
+    text-align: right;
+    font-size: 18px;
+    color: #f1faee;
+
+ }
+
+ h2{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    padding-top: 4%;
+    text-align: right;
+    padding-right: 2%;
+    font-size: 30px;
+ 
+ }
+.main{
+    /* margin-top: 3%; */
+    height: 625px;
+    width: 100%;
+    display: flex; 
+    justify-content: flex-start;
+    align-items: center; 
+    flex-direction: column;
+    /* background-color: cadetblue; */
+}
+
+.calculator{
+    height: 565px;
+    width: 25%;
+    /* background-color: blue; */
+    border: 20px solid #1d3557;
+    
+    border-radius: 20px;
+
+}
+
+.buttonGrid{
+
+    height: 425px;
+    width: 100%;
+    background-color: #1d3557;
+    /* border: 2px solid black; */
+    /* border-radius: 20px; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    /* margin-left: 2%; */
+    /* margin-right: 10%; */
+
+
+    /* display: flex; */
+    /* justify-content: center; 
+    flex-direction: column; */
+    /* align-items: center;  */
+    /* flex-wrap: wrap; */
+
+}
+
+.displayGrid{
+    height: 120px;
+    width: 100%;
+    background-color: #f1faee;
+    /* border: 2px solid black; */
+    border-radius: 2px;
+    /* margin-top: 5%; */
+ 
+
+  
+}
+
+.fillSpace{
+    height: 20px;
+    width: 100%;
+    background-color: #1d3557 ;
+}
+
+button{
+    border-radius: 50%;
+
+    border: 2px solid #457b9d;
+    background-color: #457b9d;
+    font-size: 20px;
+    height: 70px;
+    width: 70px;
+    /* box-shadow: 0 4px 8px ; */
+    color: white;
+}
+
+button:hover{
+    background-color: #e63946;
+}
+
+button:active{
+    /* box-shadow: 0 5px #666; */
+    transform: translateY(2px);
+}
+
+.equal{
+    grid-column: 3 / 5;
+    border-radius: 2.5rem;
+    width: 100%;
+}
+
+/* .ac{
+    grid-column: 2 / 5;
+    border-radius: 2.5rem;
+    width: 100%;
+} */
