@@ -17,6 +17,7 @@ body{
     font-size: 18px;
     color: #f1faee;
 
+
  }
 
  h2{
@@ -47,6 +48,9 @@ body{
     
     border-radius: 20px;
 
+    /* border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem; */
+
 }
 
 .buttonGrid{
@@ -74,12 +78,15 @@ body{
 .displayGrid{
     height: 120px;
     width: 100%;
+    border: 0px;
     background-color: #f1faee;
-    /* border: 2px solid black; */
-    border-radius: 2px;
+    
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
+    /* border-radius: .725rem; */
     /* margin-top: 5%; */
- 
 
+    /* box-shadow: inset 2px 3px 5px 0px rgb(0 0 0 / 70%); */
   
 }
 
@@ -103,6 +110,7 @@ button{
 
 button:hover{
     background-color: #e63946;
+    transform: translateY(-3px);
 }
 
 button:active{
@@ -110,11 +118,11 @@ button:active{
     transform: translateY(2px);
 }
 
-.equal{
+/* .equal{
     grid-column: 3 / 5;
     border-radius: 2.5rem;
     width: 100%;
-}
+} */
 
 /* .ac{
     grid-column: 2 / 5;

@@ -6,12 +6,21 @@ const reset = document.getElementById('reset');
 const currentNumberUpper = document.getElementById('currentNumberUpper');
 const equalButton = document.getElementById('equal');
 const decimal = document.getElementById('decimal');
+const deleteButton = document.getElementById('deleteButton');
+
 
 
 reset.addEventListener('click', resetGrid)
 equalButton.addEventListener('click',equalButtonClick)
 decimal.addEventListener('click',decimalAppend)
+deleteButton.addEventListener('click',deleteNumber)
+window.addEventListener('keydown', handleKeyboardInput);
 
+function deleteNumber(){
+    currentNumber.textContent = currentNumber.textContent
+    .toString()
+    .slice(0, -1)
+}
 
 function decimalAppend(){
 
@@ -49,7 +58,7 @@ function appendOperator(operator){
     if (length<= 20 || saveNumber!=='0'){
         currentNumberUpper.textContent = currentNumber.textContent + ' ' + operator
 
-        // currentNumber.textContent = ''
+        currentNumber.textContent = ''
 
     } else{
         // continue;
@@ -73,7 +82,7 @@ function appendNumber(num){
 
 
 function equalButtonClick(){
-    if (currentNumber.textContent === ''){
+    if ((currentNumber.textContent === '') && operatorPressed !=='!'){
         alert('You have to put another number!')
     }
 
@@ -96,6 +105,12 @@ function equalButtonClick(){
     } else if (operatorPressed === '÷') {
         divide(saveNumber,lowerNumber)
         currentNumberUpper.textContent = saveNumber + ' ' + operatorPressed + ' ' + lowerNumber
+    } else if (operatorPressed === '^') {
+        power(saveNumber,lowerNumber)
+        currentNumberUpper.textContent = saveNumber + ' ' + operatorPressed + ' ' + lowerNumber
+    } else if (operatorPressed === '!') {
+        factorial(saveNumber)
+        currentNumberUpper.textContent = saveNumber + ' ' + operatorPressed
     }
 }
 
@@ -135,7 +150,7 @@ const multiply = function(num1, num2) {
     
     console.log(ans)
     let length = currentNumber.textContent.length +1;
-    ans = ans.toFixed(21-length)
+    // ans = ans.toFixed(20-length)
 
 
     if (ans===Infinity){
@@ -152,7 +167,7 @@ function divide (num1, num2) {
 
     let ans = num1/num2;
     console.log(ans)
-    // ans = ans.toFixed(2)
+    // ans = ans.toFixed(20-length)
     if (ans===Infinity){
         currentNumber.textContent = 'Not Possible'
     } else{
@@ -164,8 +179,59 @@ function divide (num1, num2) {
 };
 
 
+const power = function(num, pow) {
+    let ans = Math.pow(num, pow)
+    if (ans===Infinity){
+        currentNumber.textContent = 'Not Possible'
+    } else{
+        currentNumber.textContent = ans
+    }
+    return ans
+	
+};
+
+const factorial = function(limit) {
+
+    if (limit%1===0){
+        let total = 1;
+        for (i = 1; i <= limit; i++) {
+            total =  total * i;
+        }
+        
+        
+        if (total===Infinity){
+            currentNumber.textContent = 'Not Possible'
+        } else{
+            currentNumber.textContent = total
+        }
+        return total
+    } else{
+        currentNumber.textContent = 'Not Possible'
+    }
+};
 
 
+function handleKeyboardInput(e) {
+    if (e.key >= 0 && e.key <= 9) appendNumber(e.key)
+    if (e.key === '.') decimalAppend()
+    if (e.key === '=' || e.key === 'Enter') equalButtonClick()
+    console.log(e.key)
+    if (e.key === 'Backspace'){
+        deleteNumber()
+    }
+    // if (e.key === 'Escape') clear()
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/')
+      appendOperator(convertOperator(e.key))
+  }
+
+  function convertOperator(keyboardOperator) {
+    if (keyboardOperator === '/') return '÷'
+    if (keyboardOperator === '*') return '×'
+    if (keyboardOperator === '-') return '-'
+    if (keyboardOperator === '+') return '+'
+  }
+
+  
 function operate(operator, num1, num2){
 
     if (operator==='+'){
