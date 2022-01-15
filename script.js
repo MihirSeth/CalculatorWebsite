@@ -17,9 +17,7 @@ deleteButton.addEventListener('click',deleteNumber)
 window.addEventListener('keydown', handleKeyboardInput);
 
 function deleteNumber(){
-    currentNumber.textContent = currentNumber.textContent
-    .toString()
-    .slice(0, -1)
+    currentNumber.textContent = currentNumber.textContent.toString().slice(0, -1)
 }
 
 function decimalAppend(){
@@ -51,17 +49,17 @@ operators.forEach((button) =>
 function appendOperator(operator){
     let length = currentNumber.textContent.length +1;
 
-    saveNumber = currentNumber.textContent
-    console.log(saveNumber)
-    operatorPressed = operator
-    currentNumberUpper.style.color ='black'
-    if (length<= 20 || saveNumber!=='0'){
+
+    
+    if (length<= 20 && currentNumber.textContent!==''){
+        saveNumber = currentNumber.textContent
+        console.log(saveNumber)
+        operatorPressed = operator
+        currentNumberUpper.style.color ='black'
         currentNumberUpper.textContent = currentNumber.textContent + ' ' + operator
 
         currentNumber.textContent = ''
 
-    } else{
-        // continue;
     }
 }
 
@@ -156,7 +154,12 @@ const multiply = function(num1, num2) {
     if (ans===Infinity){
         currentNumber.textContent = 'Not Possible'
     } else{
-        currentNumber.textContent = ans
+        if (length <=21){
+            currentNumber.textContent = ans
+        } else{
+            ans = ans.toFixed(10)
+            currentNumber.textContent = ans
+        }
     }
 
     return ans
@@ -164,6 +167,7 @@ const multiply = function(num1, num2) {
 
 function divide (num1, num2) {
     // parseInt(num2)
+    let length = currentNumber.textContent.length +1;
 
     let ans = num1/num2;
     console.log(ans)
@@ -171,7 +175,12 @@ function divide (num1, num2) {
     if (ans===Infinity){
         currentNumber.textContent = 'Not Possible'
     } else{
-        currentNumber.textContent = ans
+        if (length <=21){
+            currentNumber.textContent = ans
+        } else{
+            ans = ans.toFixed(10)
+            currentNumber.textContent = ans
+        }
     }
 
     return ans
@@ -184,7 +193,12 @@ const power = function(num, pow) {
     if (ans===Infinity){
         currentNumber.textContent = 'Not Possible'
     } else{
-        currentNumber.textContent = ans
+        if (length <=21){
+            currentNumber.textContent = ans
+        } else{
+            ans = ans.toFixed(10)
+            currentNumber.textContent = ans
+        }
     }
     return ans
 	
@@ -197,12 +211,17 @@ const factorial = function(limit) {
         for (i = 1; i <= limit; i++) {
             total =  total * i;
         }
-        
-        
         if (total===Infinity){
             currentNumber.textContent = 'Not Possible'
         } else{
-            currentNumber.textContent = total
+            if (length <=21){
+                console.log('up')
+                currentNumber.textContent = total
+            } else{
+                console.log('low')
+                ans = ans.toFixed(10)
+                currentNumber.textContent = total
+            }
         }
         return total
     } else{
@@ -212,23 +231,37 @@ const factorial = function(limit) {
 
 
 function handleKeyboardInput(e) {
-    if (e.key >= 0 && e.key <= 9) appendNumber(e.key)
-    if (e.key === '.') decimalAppend()
-    if (e.key === '=' || e.key === 'Enter') equalButtonClick()
     console.log(e.key)
-    if (e.key === 'Backspace'){
+    if (e.key >= 0 && e.key <= 9){
+        appendNumber(e.key)
+    } else if (e.key === '.'){
+        decimalAppend()
+    } else if (e.key === '=' || e.key === 'Enter'){
+        equalButtonClick()
+    } else if (e.key === 'Backspace'){
         deleteNumber()
+    }   else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/' || e.key === '!' || e.key === '^'){
+        appendOperator(convertOperator(e.key))
+
     }
     // if (e.key === 'Escape') clear()
-    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/')
-      appendOperator(convertOperator(e.key))
+
   }
 
   function convertOperator(keyboardOperator) {
-    if (keyboardOperator === '/') return '÷'
-    if (keyboardOperator === '*') return '×'
-    if (keyboardOperator === '-') return '-'
-    if (keyboardOperator === '+') return '+'
+    if (keyboardOperator === '/'){
+        return '÷'
+    } else if (keyboardOperator === '*') {
+        return '×'
+    }else if (keyboardOperator === '-'){
+        return '-'
+    }else if (keyboardOperator === '+'){
+        return '+'
+    } else if (keyboardOperator === '!'){
+        return '!'
+    } else if (keyboardOperator === '^'){
+        return '^'
+    }
   }
 
   
@@ -248,6 +281,7 @@ function operate(operator, num1, num2){
 
 
 window.onload = () => {
+    console.log(window.screen.height)
     currentNumber.textContent = 0
 }
 
